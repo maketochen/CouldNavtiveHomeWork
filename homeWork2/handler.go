@@ -10,7 +10,7 @@ type Response struct {
 }
 
 func (a *App) healthz(w http.ResponseWriter, r *http.Request) {
-	respondWithJSON(w, http.StatusOK, Response{Message: string(http.StatusOK)}, nil)
+	respondWithJSON(w, http.StatusOK, Response{Message: "success"}, nil)
 }
 
 func (a *App) version(w http.ResponseWriter, r *http.Request) {
