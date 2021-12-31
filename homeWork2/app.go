@@ -26,7 +26,7 @@ func (a *App) Initialize(e *Env) {
 func (a *App) InitializeRouter() {
 	m := alice.New(a.Middlewares.LoggingHandler)
 
-	a.Router.Handle("/Version", m.ThenFunc(a.version)).Methods("post")
+	a.Router.Handle("/version", m.ThenFunc(a.version)).Methods("get")
 	a.Router.Handle("/healthz", m.ThenFunc(a.healthz)).Methods("get")
 }
 

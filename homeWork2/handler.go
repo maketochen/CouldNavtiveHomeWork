@@ -14,11 +14,12 @@ func (a *App) healthz(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) version(w http.ResponseWriter, r *http.Request) {
-	headers := map[string]string{"VERSION": getEnv().Version}
 	header := r.Header
+	headers := map[string]string{"VERSION": getEnv().Version}
 	for name, value := range header {
-		headers[name] = strings.Join(value, "")
+		headers[name] = strings.Join(value, ",")
 	}
 	respondWithJSON(w, http.StatusOK, Response{Message: "success"}, headers)
+
 
 }
