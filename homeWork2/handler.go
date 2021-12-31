@@ -19,7 +19,7 @@ func (a *App) version(w http.ResponseWriter, r *http.Request) {
 	for name, value := range header {
 		headers[name] = strings.Join(value, ",")
 	}
-	respondWithJSON(w, http.StatusOK, Response{Message: "success"}, headers)
+	respondWithJSON(w, http.StatusOK, Response{Message: "success1"}, headers)
 
 
 }
