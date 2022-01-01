@@ -9,9 +9,9 @@ import (
 )
 
 type App struct {
-	Router     *mux.Router
+	Router      *mux.Router
 	Middlewares *middleware.Middleware
-	Config     *Env
+	Config      *Env
 }
 
 func (a *App) Initialize(e *Env) {
