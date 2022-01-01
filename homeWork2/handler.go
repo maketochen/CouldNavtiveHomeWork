@@ -10,7 +10,7 @@ type Response struct {
 }
 
 func (a *App) healthz(w http.ResponseWriter, r *http.Request) {
-	respondWithJSON(w, http.StatusOK, Response{Message: "success"}, nil)
+	respondWithJSON(w, http.StatusOK, Response{Message: "healthz success"}, nil)
 }
 
 func (a *App) version(w http.ResponseWriter, r *http.Request) {
@@ -18,6 +18,6 @@ func (a *App) version(w http.ResponseWriter, r *http.Request) {
 	for name, value := range r.Header {
 		headers[name] = strings.Join(value, ",")
 	}
-	respondWithJSON(w, http.StatusOK, Response{Message: "success1"}, headers)
+	respondWithJSON(w, http.StatusOK, Response{Message: "version success"}, headers)
 
 }
