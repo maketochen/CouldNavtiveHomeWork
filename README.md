@@ -1,6 +1,10 @@
 # CouldNavtiveHomeWork
 Could Navtive study（ HomeWork）
 
+# 模块一
+基于 Channel 编写一个简单的单线程生产者消费者模型
+
+
 # 模块二
 接收客户端 request，并将 request 中带的 header 写入 response header
 读取当前系统的环境变量中的 VERSION 配置，并写入 response header
