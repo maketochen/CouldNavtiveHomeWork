@@ -17,3 +17,9 @@ Server 端记录访问日志包括客户端 IP，HTTP 返回码，输出到 serv
 已推送到DockerHub
 cheney1997/httpserver:1.0.0
 
+# 模块四
+启动一个 Envoy Deployment。
+要求 Envoy 的启动配置从外部的配置文件 Mount 进 Pod。
+进入 Pod 查看 Envoy 进程和配置。
+更改配置的监听端口并测试访问入口的变化。
+通过非级联删除的方法逐个删除对象。
