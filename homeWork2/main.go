@@ -7,6 +7,7 @@ package main
 Server 端记录访问日志包括客户端 IP，HTTP 返回码，输出到 server 端的标准输出
 当访问 localhost/healthy 时，应返回 200
 */
+
 func main() {
 	app := App{}
 	app.Initialize(getEnv())
