@@ -6,7 +6,6 @@ import (
 	"homeWork2/middleware"
 	"log"
 	"net/http"
-	"os"
 )
 
 type App struct {
@@ -32,9 +31,9 @@ func (a *App) InitializeRouter() {
 }
 
 func (a *App) Run(addr string) {
-	err := http.ListenAndServe(":" + os.Getenv("MY_SERVICE_PORT"), nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+	//err := http.ListenAndServe(":" + os.Getenv("MY_SERVICE_PORT"), nil)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
 	log.Fatal(http.ListenAndServe(addr, a.Router))
 }

@@ -10,6 +10,7 @@ type Env struct {
 获取环境变量中的Version
 */
 func getEnv() *Env {
-	v := os.Getenv("VERSION")
+	os.Setenv("Version","0.0.1")
+	v := os.Getenv("Version")
 	return &Env{Version: v}
 }
