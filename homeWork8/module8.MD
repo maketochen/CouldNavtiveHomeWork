@@ -20,3 +20,12 @@ k create -f secret.yaml
 # 创建ingress
 k create -f ingress.yaml
 
+##TODO
+官方的yaml中使用的镜像不能下载，所以要改成dockerhub上的镜像
+image: k8s.gcr.io/ingress-nginx/controller:v1.0.0  -> https://hub.docker.com/r/willdockerhub/ingress-nginx-controller
+docker pull willdockerhub/ingress-nginx-controller:v1.0.0
+    
+image: k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.0 -> https://hub.docker.com/r/jettech/kube-webhook-certgen/tags
+docker pull jettech/kube-webhook-certgen:v1.0.0  
+
+！！！！拉不下来的image 统统替换国内的image 
