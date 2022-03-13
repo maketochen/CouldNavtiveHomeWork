@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: httpservice
+  labels:
+    name: httpservice
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpservice
+  namespace: httpservice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: httpservice
+  template:
+    metadata:
+      #      annotations:
+      #        prometheus.io/scrape: "true"
+      #        prometheus.io/port: "8077"
+      labels:
+        app: httpservice
+    spec:
+      containers:
+        - name: httpservice
+          image: cheney1997/httpserver:2.0.0
+          ports:
+            - containerPort: 8001
+          env:
+            - name: VERSION
+              value: 1.0.1-a
+          resources: # 资源限制
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 200m
+              memory: 100Mi
+          livenessProbe: # 探活
+            httpGet:
+              path: /healthz
+              port: 8001
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 80
+            successThreshold: 1
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe: # 就绪状态检查
+            httpGet:
+              path: /healthz
+              port: 8001
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 50
+            successThreshold: 1
+            timeoutSeconds: 5
+            failureThreshold: 3
+          lifecycle:
+            postStart: # 优雅启动
+              exec:
+                command: [ "/bin/sh", "-c", "echo postStart. HTTPSERVER >/proc/1/fd/1" ]
+            preStop: # 优雅终止
+              exec:
+                command: [ "/bin/sh", "-c", "echo preSop. HTTPSERVER >/proc/1/fd/1 && sleep 60" ]
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpservice
+  namespace: httpservice  #配置自动发现
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8001"
+spec:
+  #  type: NodePort
+  ports:
+    - name: httpservice
+      port: 8088 # 对外开放的服务端口
+      targetPort: 8001 # 后方 pod 的服务端口
+  selector:
+    app: httpservice

@@ -27,13 +27,13 @@ spec:
                 cpu: "400m"
             args:
             - /httpserver    
-            readinessProbe: 
+            readinessProbe: #健康检查
               httpGet: 
                 path: /healthz
                 port: 8000
               initialDelaySeconds: 10
               periodSeconds: 5
-            livenessProbe: 
+            livenessProbe: #探活
               httpGet: 
                 path: /healthz
                 port: 8000
